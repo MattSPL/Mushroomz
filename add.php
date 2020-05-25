@@ -27,8 +27,11 @@ if(!isset($_COOKIE["isLogged"]))
         
         
             <li class="nav-item" id="searcher">
-                <input type="search" id="searchbox" placeholder="Szukam..."></input>
-                <button id="searchbutton">Szukaj</button>
+                <form action="searchScript.php" method="post">
+                <input type="search" id="searchbox" name="searchbox" placeholder="Szukam..."></input>
+                <input type="submit" id="searchbutton" value="Szukaj">
+               
+            </form>
             </li>
             <li class="nav-item">
                 <a href="logout.php"><button class="navbarbutton" id="logoutbutton" >Wyloguj</button></a>
@@ -77,15 +80,14 @@ if(!isset($_COOKIE["isLogged"]))
          
          <button class="primaryButton" id="addMainImageBtn">Wybierz główne zdjęcie</button>
 
-        <form enctype="multipart/form-data" action=""  method="post">
+        <form enctype="multipart/form-data" action=""  method="post" id="form1">
             
             <input type="file" name="image" class="primaryButton" id="addMainImageBtnForm" alt="" hidden>
 
-            <input type="submit" name="imageDisp1" class="secondaryButton" id="addMainImageBtn2" value="Dodaj zdjęcie">
-            <!-- <button class="secondaryButton" id="addMainImageBtn2">Dodaj zdjęcie</button> -->
+            <input type="submit" name="imageDisp1" class="secondaryButton" id="addMainImageBtn2" value="Dodaj zdjęcie" form="form1">
             
             <?php
-            if(isset($_REQUEST['imageDisp1']))
+            if(isset($_POST['imageDisp1']))
                 {
                     if($_FILES){
                     $uploaddir = 'images/';
@@ -107,17 +109,15 @@ if(!isset($_COOKIE["isLogged"]))
         </form>    
 
     <div id="small-images-panel-add" >
-        <form enctype="multipart/form-data" action="" method="post">
+        <form enctype="multipart/form-data" action="" method="post" id="form2">
             <div class="imageAddPanel">
-                <!-- <form enctype="multipart/form-data" action="" method="post">
-                    <input type="file" name="miniImage1" class="addImageBtn"> -->
-                    
-                    <!-- <button >Dodaj</button> -->
+
                     <input type="file" name="image2" class="primaryButton addImageBtn" value="Wybierz">
-                    <input type="submit" name="imageDisp2" class="secondaryButton addImageBtn2" value="Dodaj">
+                    <input type="submit" name="imageDisp2" class="secondaryButton addImageBtn2" value="Dodaj" form="form2">
+                    
 
                      <?php
-                     if(isset($_REQUEST['imageDisp2']))
+                     if(isset($_POST['imageDisp2']))
                      {
                         if($_FILES){
                             $uploaddir = 'images/';

@@ -26,8 +26,11 @@ if(isset($_COOKIE["isLogged"]))
            
            
             <li class="nav-item" id="searcher">
-                <input type="search" id="searchbox" placeholder="Szukam..."></input>
-                <button id="searchbutton">Szukaj</button>
+                <form action="searchScript.php" method="post">
+                <input type="search" id="searchbox" name="searchbox" placeholder="Szukam..."></input>
+                <input type="submit" id="searchbutton" value="Szukaj">
+               
+            </form>
             </li>
             <li class="nav-item">
                 <a href="login.php"><button class="navbarbutton" id="loginbutton" >Zaloguj</button></a>

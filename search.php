@@ -4,6 +4,17 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "atlas";
+$searched = "";
+
+
+if(isset($_COOKIE["searched"]))
+{
+    $searched = $_COOKIE["searched"];
+}else
+{
+    header("Location: index.php");
+};
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,7 +25,10 @@ if ($conn->connect_error) {
 
 mysqli_set_charset($conn, 'utf8');
 
-$sql = "SELECT mushrooms.id, mushroom, category, edibility_status, main_photo, description FROM `mushrooms` join edibility on mushrooms.edibility_id=edibility.id JOIN categories ON mushrooms.category_id = categories.id";
+$sql = "SELECT mushrooms.id, mushroom, category, edibility_status, main_photo, description FROM `mushrooms` join edibility on mushrooms.edibility_id=edibility.id JOIN categories ON mushrooms.category_id = categories.id where mushroom = '$searched'";
+
+setcookie("searched", "", time()-1);
+
 $result = $conn->query($sql);
 ?>
 
@@ -41,7 +55,6 @@ $result = $conn->query($sql);
                 <form action="searchScript.php" method="post">
                 <input type="search" id="searchbox" name="searchbox" placeholder="Szukam..."></input>
                 <input type="submit" id="searchbutton" value="Szukaj">
-               
             </form>
             </li>
             
@@ -131,11 +144,8 @@ if ($result->num_rows > 0) {
      
 ?>
 <div class="grid-item" id="content-panel">
-    <form action="" method="post"></form>
 <a class="content" href="details.php?ID=<?php echo $row['id']?>">
-                    
                      <div class="content-link">
-                         <input type="hidden" name="mushroomID" value=<?php $row['id']?>>
                          <img src=<?php echo $row["main_photo"]?> alt="" align="left" class="index-page-panel-image" >
                             <h6><?php echo $row['mushroom']?></h6>
                             <h5>Kategoria: <?php echo $row['category']?></h5>
@@ -148,7 +158,7 @@ if ($result->num_rows > 0) {
   
 } 
 }else {
-  echo "0 results";
+  echo "Niestety, nic nie znaleziono.";
 }
 $conn->close();
 

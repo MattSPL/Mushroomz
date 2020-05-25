@@ -552,8 +552,8 @@ input,button{
       left: 5%;
       width: 45%;
       max-width: 45%;
-      height: 65%;
-      max-height: 65%;
+      height: 45%;
+      max-height: 45%;
       vertical-align: middle;
       text-align: center;
       
@@ -570,20 +570,27 @@ input,button{
 
   #description{
       position: absolute;
-      top: 30%;
+      top: 42%;
       right: 5%;
+  }
+
+  #namePanel{
+    position: absolute;
+    top: 12%;
+    right: 5%;
+    padding-right: 5px;
   }
 
   #categoryPanel{
     position: absolute;
-    top: 10%;
+    top: 22%;
     right: 5%;
     padding-right: 5px;
   }
 
   #edibilityPanel{
     position: absolute;
-    top: 20%;
+    top: 32%;
     right: 5%;
     padding-right: 5px;
   }
